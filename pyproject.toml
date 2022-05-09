@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "flake8-jungle"
+version = "1.0.0"
+license = "GPL-3.0-or-later"
+description = "Plugin to lint various issues in code."
+authors = ["Twisto Platform Team <platform@twisto.cz>"]
+readme = "README.md"
+keywords = ["flake8", "lint"]
+repository = "https://github.com/TwistoPayments/flake8-jungle"
+classifiers=[
+    "Framework :: Flake8",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[tool.poetry.plugins]
+[tool.poetry.plugins."flake8.extension"]
+JG = "flake8_jungle:JungleStyleChecker"
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+flake8 = ">=3.8.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.2"
+pytest-cov = "^2.11.1"
+
+[tool.black]
+line-length = 88
+target_version = ["py310"]
+
+[tool.isort]
+profile = "black"
+known_first_party = "flake8_jungle"

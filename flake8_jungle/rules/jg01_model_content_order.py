@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import ast
 from ast import Assign, ClassDef, FunctionDef
 from functools import partial

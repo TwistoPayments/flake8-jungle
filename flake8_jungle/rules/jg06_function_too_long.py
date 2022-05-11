@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import ast
-from typing import Iterable
+from typing import Iterable, Union
 
 from .base import Issue, Rule
 
@@ -11,7 +11,7 @@ class JG06(Issue):
     description = "Function is too long. Length {found} > {allowed}."
 
 
-FunctionType = ast.FunctionDef | ast.AsyncFunctionDef
+FunctionType = Union[ast.FunctionDef, ast.AsyncFunctionDef]
 
 
 class FunctionTooLongRule(Rule[FunctionType]):

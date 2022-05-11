@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import ast
-from typing import Iterable
+from typing import Iterable, Union
 
 from .base import Issue, Rule
 
@@ -14,7 +14,7 @@ class JG10(Issue):
     )
 
 
-FunctionType = ast.FunctionDef | ast.AsyncFunctionDef
+FunctionType = Union[ast.FunctionDef, ast.AsyncFunctionDef]
 
 
 class TooMuchPatchingRule(Rule[FunctionType]):

@@ -94,7 +94,7 @@ class JungleStyleChecker:
     """
 
     name = "flake8-twisto"
-    version = "1.0.0"
+    version = "1.0.1"
 
     _options = None
     _option_fields = dataclasses.fields(RuleOptions)

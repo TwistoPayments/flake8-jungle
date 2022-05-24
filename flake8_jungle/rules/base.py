@@ -35,7 +35,7 @@ class RuleOptions:
 
     max_model_length: int = 500
     max_function_length: int = 50
-    max_condition_complexity: int = 5
+    max_condition_complexity: int = 8
     max_patches_in_test: int = 3
 
 

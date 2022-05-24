@@ -24,7 +24,9 @@ class TryExceptPassRule(Rule[ast.Try]):
         issues = []
 
         for handler in node.handlers:
-            if len(handler.body) == 1 and isinstance(handler.body[0], ast.Pass):
+            if len(handler.body) == 1 and isinstance(
+                handler.body[0], (ast.Pass, ast.Return)
+            ):
                 pass_node = handler.body[0]
                 issues.append(
                     JG04(

@@ -7,3 +7,7 @@ def func():
         pass
     except ZeroDivisionError:
         pass
+    except KeyError:
+        return
+    except Exception:
+        return None

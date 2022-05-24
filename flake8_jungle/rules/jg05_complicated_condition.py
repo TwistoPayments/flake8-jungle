@@ -20,6 +20,16 @@ class ComplicatedConditionRule(Rule[ast.If]):
     Too complex conditions are harder to read and can introduce bugs.
     """
 
+    #: Weight of complexity for each op. Default is 1.
+    CMP_WEIGHTS: dict[type[ast.cmpop], int] = {
+        ast.NotEq: 2,
+        ast.In: 2,
+        ast.NotIn: 3,
+    }
+
+    def _calculate_compare_complexity(self, cmp: ast.Compare) -> int:
+        return sum(self.CMP_WEIGHTS.get(type(op), 1) for op in cmp.ops)
+
     def _calculate_complexity(self, test: ast.expr) -> int:
         complexity = 1
         if isinstance(test, ast.UnaryOp):
@@ -29,6 +39,8 @@ class ComplicatedConditionRule(Rule[ast.If]):
                 complexity += self._calculate_complexity(value)
         elif isinstance(test, ast.NamedExpr):
             complexity += self._calculate_complexity(test.value)
+        elif isinstance(test, ast.Compare):
+            complexity += self._calculate_compare_complexity(test)
         return complexity
 
     def run(self, node: ast.If) -> Iterable[Issue]:

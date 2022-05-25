@@ -22,7 +22,7 @@ class ComplicatedConditionRule(Rule[ast.If]):
 
     #: Weight of complexity for each op. Default is 1.
     CMP_WEIGHTS: dict[type[ast.cmpop], int] = {
-        ast.NotEq: 2,
+        ast.Eq: 0,
         ast.In: 2,
         ast.NotIn: 2,
     }

@@ -32,12 +32,14 @@ def test_is_not_complicated_condition():
         ("a and b and not c", 5),
         ("not a and not b and not c", 7),
         ("a in [1, 2]", 3),
-        ("a not in [1, 2]", 4),
+        ("a not in [1, 2]", 3),
+        ("a not in [1, 2] and b not in [3, 4]", 7),
         ("a == b", 2),
         ("a != b", 3),
         ("a > b >= c", 3),
         ("a > b >= c > d", 4),
         ("a > b >= c > d != e", 6),
+        ("not (a and b in (1, 2) or not c)", 9),
     ],
 )
 def test_complexity_evaluation(condition, complexity):

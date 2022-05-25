@@ -24,7 +24,7 @@ class ComplicatedConditionRule(Rule[ast.If]):
     CMP_WEIGHTS: dict[type[ast.cmpop], int] = {
         ast.NotEq: 2,
         ast.In: 2,
-        ast.NotIn: 3,
+        ast.NotIn: 2,
     }
 
     def _calculate_compare_complexity(self, cmp: ast.Compare) -> int:

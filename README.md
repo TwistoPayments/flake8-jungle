@@ -29,7 +29,7 @@ $ pip install flake8-jungle
 | `JG02` | Do not use `exclude` attribute in `ModelForm`, list all items explicitly in `fields` attribute instead. | |
 | `JG03` | Avoid using `null=True` on string-based fields such as `CharField` and `TextField`. | |
 | `JG04` | Exceptions should never pass silently, add logging or comment at least. | |
-| `JG05` | Condition is too complex which makes it impossible to understand. | `--max-condition-complexity` |
+| `JG05` | Condition is too complex which makes it hard to understand. | `--max-condition-complexity` |
 | `JG06` | Function is too long. | `--max-function-length` |
 | `JG07` | Model is too long, split it into services, selectors, or utilities. | `--max-model-length` |
 | `JG08` | Function or method contains local imports, which should be mostly avoided. If you are trying to fix curcular dependency issues, the design probably has some flaws, you should consider refactoring instead. |

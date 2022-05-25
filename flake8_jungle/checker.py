@@ -90,10 +90,10 @@ class JungleStyleVisitor(ast.NodeVisitor):
 
 class JungleStyleChecker:
     """
-    Check common Twisto Style errors
+    Check common Jungle Style errors
     """
 
-    name = "flake8-twisto"
+    name = "flake8-jungle"
     version = "1.0.3"
 
     _options = None

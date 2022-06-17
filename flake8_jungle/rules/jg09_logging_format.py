@@ -10,7 +10,7 @@ class JG09(Issue):
     code = "JG09"
     description = (
         "Incorrect logging format, please use the following syntax: "
-        'logging.{level}("MESSAGE %(arg1)s", {{"arg1": "value1"}}).'
+        'logger.{level}("MESSAGE %(arg1)s", {{"arg1": "value1"}}).'
     )
 
 
@@ -20,17 +20,17 @@ class LoggingFormatRule(Rule[ast.Call]):
 
     The only allowed forms are:
 
-        logging.info("Request %s did not succed.", request.correlation_id)
-        logging.info("Request %(id)s did not succed.", {"id": request.correlation_id})
+        logger.info("Request %s did not succed.", request.correlation_id)
+        logger.info("Request %(id)s did not succed.", {"id": request.correlation_id})
     """
 
-    LOGGING_CALLS: set[str] = {"log", "logger", "logging"}
+    LOGGER_CALLS: set[str] = {"log", "logger", "logging"}
 
     def is_logging_call(self, node: ast.Call) -> bool:
         return (
             isinstance(node.func, ast.Attribute)
             and isinstance(node.func.value, ast.Name)
-            and node.func.value.id in self.LOGGING_CALLS
+            and node.func.value.id in self.LOGGER_CALLS
         )
 
     def is_incorrect_format(self, node: ast.Call) -> bool:

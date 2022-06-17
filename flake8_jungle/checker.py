@@ -18,6 +18,7 @@ from flake8_jungle.rules import (
     ModelTooLongRule,
     Rule,
     RuleOptions,
+    StructlogFormatRule,
     TooMuchPatchingRule,
     TryExceptPassRule,
 )
@@ -32,6 +33,7 @@ class JungleStyleVisitor(ast.NodeVisitor):
         "Call": [
             ModelFieldRule,
             LoggingFormatRule,
+            StructlogFormatRule,
         ],
         "ClassDef": [
             ModelFormRule,
@@ -98,6 +100,7 @@ class JungleStyleChecker:
 
     _options = None
     _option_fields = dataclasses.fields(RuleOptions)
+    _default_ignores = ["JG01", "JG03", "JG09"]
 
     def __init__(self, tree: ast.AST, filename: str) -> None:
         self.tree = tree
@@ -128,6 +131,7 @@ class JungleStyleChecker:
 
     @classmethod
     def add_options(cls, parser: OptionManager) -> None:
+        parser.extend_default_ignore(cls._default_ignores)
         for field in cls._option_fields:
             parser.add_option(
                 f'--{field.name.replace("_", "-")}',

@@ -9,6 +9,7 @@ from .jg07_model_too_long import ModelTooLongRule
 from .jg08_import_inside_function import ImportInsideFunctionRule
 from .jg09_logging_format import LoggingFormatRule
 from .jg10_too_much_patching import TooMuchPatchingRule
+from .jg11_structlog_format import StructlogFormatRule
 
 __all__ = [
     "Rule",
@@ -24,5 +25,6 @@ __all__ = [
     "ModelTooLongRule",
     "ImportInsideFunctionRule",
     "LoggingFormatRule",
+    "StructlogFormatRule",
     "TooMuchPatchingRule",
 ]

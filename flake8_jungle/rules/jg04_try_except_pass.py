@@ -20,18 +20,28 @@ class TryExceptPassRule(Rule[ast.Try]):
     in hiding important information.
     """
 
+    def _is_pass(self, node: ast.stmt) -> bool:
+        return isinstance(node, ast.Pass)
+
+    def _is_return_none(self, node: ast.stmt) -> bool:
+        if isinstance(node, ast.Return):
+            if node.value is None:
+                return True
+            if isinstance(node.value, ast.Constant) and node.value.value is None:
+                return True
+        return False
+
     def run(self, node: ast.Try) -> Iterable[Issue]:
         issues = []
 
         for handler in node.handlers:
-            if len(handler.body) == 1 and isinstance(
-                handler.body[0], (ast.Pass, ast.Return)
-            ):
-                pass_node = handler.body[0]
+            if len(nodes := handler.body) != 1:
+                continue
+            if self._is_return_none(nodes[0]) or self._is_pass(nodes[0]):
                 issues.append(
                     JG04(
-                        lineno=pass_node.lineno,
-                        col=pass_node.col_offset,
+                        lineno=nodes[0].lineno,
+                        col=nodes[0].col_offset,
                     )
                 )
 

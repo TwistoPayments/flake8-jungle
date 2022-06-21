@@ -11,3 +11,5 @@ def func():
         return
     except Exception:
         return None
+    except BaseException:
+        return 5  # this is ok

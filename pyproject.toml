@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flake8-jungle"
-version = "1.0.5"
+version = "1.0.6"
 license = "GPL-3.0-or-later"
 description = "Plugin to lint various issues in code."
 authors = ["Twisto Platform Team <platform@twisto.cz>"]

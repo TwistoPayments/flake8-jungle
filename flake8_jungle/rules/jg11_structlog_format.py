@@ -27,6 +27,7 @@ class StructlogFormatRule(Rule[ast.Call]):
 
     LOGGER_CALLS: set[str] = {"log", "logger", "logging"}
     MSG_RE: Pattern[str] = re.compile(r"^[a-z\d\._]+$")
+    FORMAT_PLACEHOLDER_RE: Pattern[str] = re.compile(r"\{([^\}]*)\}")
 
     def is_logging_call(self, node: ast.Call) -> bool:
         return (
@@ -38,11 +39,36 @@ class StructlogFormatRule(Rule[ast.Call]):
     def is_incorrect_format(self, node: ast.Call) -> bool:
         if not node.args:
             return False
-        if len(node.args) > 1 or not isinstance(node.args[0], ast.Constant):
+        if len(node.args) > 1:
             return True
-        msg = node.args[0].value
+
+        arg0 = node.args[0]
+
+        # simply log.info("msg")
+        if isinstance(arg0, ast.Constant):
+            msg = arg0.value
+
+        # usage of .format() log.info("{}.msg".format("bar"))
+        elif (
+            isinstance(arg0, ast.Call)
+            and isinstance(arg0.func, ast.Attribute)
+            and isinstance(arg0.func.value, ast.Constant)
+        ):
+            msg = self.FORMAT_PLACEHOLDER_RE.sub("", arg0.func.value.value)
+
+        # usage of f-string log.info(f"{var}.msg")
+        elif isinstance(arg0, ast.JoinedStr):
+            msg = "".join(
+                part.value for part in arg0.values if isinstance(part, ast.Constant)
+            )
+
+        # everything else is not checked
+        else:
+            return False
+
         if not self.MSG_RE.match(msg):
             return True
+
         return False
 
     def run(self, node: ast.Call) -> Iterable[Issue]:

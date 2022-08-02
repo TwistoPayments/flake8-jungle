@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: flake8-jungle
+  description: |
+    Flake8-jungle is an open-source plugin for flake8 which adds several new rules.
+  links:
+    - title: Documentation
+      url: https://pypi.org/project/flake8-jungle/
+  annotations:
+    github.com/project-slug: TwistoPayments/flake8-jungle
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - python
+    - flake8
+    - quality
+spec:
+  type: library
+  owner: dev-platform
+  lifecycle: experimental

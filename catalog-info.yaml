@@ -5,8 +5,15 @@ metadata:
   description: |
     Flake8-jungle is an open-source plugin for flake8 which adds several new rules.
   links:
-    - title: Documentation
+    - title: PyPi
+      icon: dashboard
       url: https://pypi.org/project/flake8-jungle/
+    - title: GitHub
+      icon: github
+      url: https://github.com/TwistoPayments/flake8-jungle/
+    - title: Flake8 Documentation
+      icon: docs
+      url: https://flake8.pycqa.org/en/latest/
   annotations:
     github.com/project-slug: TwistoPayments/flake8-jungle
     backstage.io/techdocs-ref: dir:.

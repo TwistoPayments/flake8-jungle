@@ -24,4 +24,5 @@ metadata:
 spec:
   type: library
   owner: dev-platform
+  system: platform
   lifecycle: experimental

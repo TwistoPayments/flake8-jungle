@@ -23,6 +23,6 @@ metadata:
     - quality
 spec:
   type: library
-  owner: dev-platform
+  owner: org-back-end-platform
   system: platform
   lifecycle: experimental

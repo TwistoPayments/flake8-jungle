@@ -11,7 +11,9 @@ from .utils import error_code_in_result, load_fixture_file, run_check
 )
 def test_is_function_too_long(function_max_length: int, function_result: int):
     code = load_fixture_file("function_too_long.py")
-    result = run_check(code, options=RuleOptions(max_function_length=function_max_length))
+    result = run_check(
+        code, options=RuleOptions(max_function_length=function_max_length)
+    )
     assert len(result) == function_result
     if function_result == 1:
         assert error_code_in_result("JG06", result)

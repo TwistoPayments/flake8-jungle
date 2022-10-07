@@ -27,6 +27,10 @@ class FunctionTooLongRule(Rule[FunctionType]):
             return issues
         length = node.end_lineno - node.lineno
 
+        docstring: str = ast.get_docstring(node, clean=False)
+        if docstring:
+            length -= len(docstring.splitlines())
+
         if length > self.options.max_function_length:
             issues.append(
                 JG06(

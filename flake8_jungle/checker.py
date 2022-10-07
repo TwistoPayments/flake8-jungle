@@ -96,7 +96,7 @@ class JungleStyleChecker:
     """
 
     name = "flake8-jungle"
-    version = "1.0.6"
+    version = "1.0.7"
 
     _options = None
     _option_fields = dataclasses.fields(RuleOptions)
